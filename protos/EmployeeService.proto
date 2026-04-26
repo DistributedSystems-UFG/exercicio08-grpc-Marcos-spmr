@@ -18,7 +18,10 @@ service EmployeeService {
   rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
   // List all employees
   rpc ListAllEmployees (EmptyMessage) returns (EmployeeDataList) {}
-  
+  // NOVO: List employees by title
+  rpc GetEmployeesByTitle (EmployeeTitle) returns (EmployeeDataList) {}
+  // NOVO: Count total employees
+  rpc CountEmployees (EmptyMessage) returns (EmployeeCount) {}
 }
 
 message EmployeeData {
@@ -40,8 +43,18 @@ message EmployeeTitleUpdate {
   string title = 2;
 }
 
-message EmptyMessage{}
+message EmptyMessage {}
 
-message EmployeeDataList{
+message EmployeeDataList {
   repeated EmployeeData employee_data = 1;
+}
+
+// NOVA mensagem: filtro por cargo
+message EmployeeTitle {
+  string title = 1;
+}
+
+// NOVA mensagem: contagem de funcionários
+message EmployeeCount {
+  uint32 count = 1;
 }
